@@ -1,11 +1,11 @@
 # challenge-01
-customize nginx image with selfsigned certificate and nginx image
+Customize nginx image with selfsigned certificate and nginx image
 
 ### About this challenge
 
 * Make custome nginx docker image with docker file 
 * Insert custome index.html in nginx image
-* Deployment manifest with replica 2 and service, ingress, selfsined certificate
+* Kubernetes Deployment manifest with replica 2 and service, ingress, selfsined certificate
 
 ### Before run 
 
@@ -14,12 +14,12 @@ customize nginx image with selfsigned certificate and nginx image
 
 #### 1) build docker file in your worker node
 
-```
+```bash
 docker build -t saeed-nginx .
 ```
 
 #### 2) deploy manifest in your kubernetes cluster
 
-```
+```bash
 kubectl create -f deployment.yaml
 ```
