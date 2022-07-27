@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: op-lab
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: op-lab
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: web
+        image: saeed-nginx:v1.0
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-svc
+  namespace: op-lab
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  selector:
+    app: web
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: selfsigned-issuer
+  namespace: op-lab
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: web-selfsigned-certificate
+  namespace: op-lab
+spec:
+  secretName: web-selfsigned
+  dnsNames:
+  - "*.example.com"
+  isCA: true
+  issuerRef:
+    name: selfsigned-issuer
+    kind: Issuer
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  namespace: op-lab
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - web.example.com
+    secretName: web-selfsigned
+  rules:
+  - host: web.example.com
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: web-svc
+            port:
+              number: 80
