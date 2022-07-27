@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: saeed-nginx:v1.0
+        image: saeedbeast/2048:v1.0
         ports:
         - containerPort: 80
 ---
