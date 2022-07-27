@@ -1,5 +1,5 @@
 # challenge-01
-Customize nginx image with selfsigned certificate and nginx image
+Run 2048 game image with selfsigned certificate and nginx image on kubernetes
 
 ### About this challenge
 
@@ -12,13 +12,22 @@ Customize nginx image with selfsigned certificate and nginx image
 * You need deploy nginx ingress in your cluster
 * You need deploy certmanager in your cluster
 
+
+
+
 #### 1) build docker file in your worker node
 
 ```bash
-docker build -t saeed-nginx .
+docker build -t saeedbeast/2048:v1.0 .
 ```
 
-#### 2) deploy manifest in your kubernetes cluster
+#### 2) push to my repository
+
+```
+docker image push saeedbeast/2048:v1.0
+```
+
+#### 3) deploy manifest in your kubernetes cluster
 
 ```bash
 kubectl create -f deployment.yaml
