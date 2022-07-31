@@ -1,10 +1,11 @@
-# challenge-01
+# Kubernetes 2048 Game
+
 Run 2048 game image with selfsigned certificate and nginx image on kubernetes
 
-### About this challenge
+### About this Senario
 
 * Make custome nginx docker image with docker file 
-* Insert custome index.html in nginx image
+* Insert 2048 contents in nginx image
 * Kubernetes Deployment manifest with replica 2 and service, ingress, selfsined certificate
 
 ### Before run 
