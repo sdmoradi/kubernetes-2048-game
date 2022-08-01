@@ -14,21 +14,26 @@ Run 2048 game image with selfsigned certificate and nginx image on kubernetes
 * You need deploy certmanager in your cluster
 
 
+#### 0) For deploy certmanager in your cluster use bellow command
+
+```
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.9.1/cert-manager.yaml
+```
 
 
-#### 1) build docker file in your worker node
+#### 1) Build docker file
 
 ```bash
-docker build -t saeedbeast/2048:v1.0 .
+docker build -t sdmoradi/2048:v1.0 .
 ```
 
-#### 2) push to my repository
+#### 2) Push to your docker registry
 
 ```
-docker image push saeedbeast/2048:v1.0
+docker image push sdmoradi/2048:v1.0
 ```
 
-#### 3) deploy manifest in your kubernetes cluster
+#### 3) Deploy manifest in your kubernetes cluster
 
 ```bash
 kubectl create -f deployment.yaml
